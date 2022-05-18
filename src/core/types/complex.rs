@@ -13,6 +13,9 @@ macro_rules! complex {
     ($x:expr, $y:expr) => {
         rom_rs::Complex::new($x as f32, $y as f32)
     };
+    ($x:expr) => {
+        rom_rs::Complex::new($x as f32, 0.0)
+    }
 }
 
 impl Complex {
