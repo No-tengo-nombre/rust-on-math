@@ -120,6 +120,25 @@ impl ops::Add<i32> for Complex {
     }
 }
 
+impl ops::AddAssign<Complex> for Complex {
+    fn add_assign(&mut self, rhs: Complex) {
+        self.real += rhs.real();
+        self.imag += rhs.imag();
+    }
+}
+
+impl ops::AddAssign<f32> for Complex {
+    fn add_assign(&mut self, rhs: f32) {
+        self.real += rhs;
+    }
+}
+
+impl ops::AddAssign<i32> for Complex {
+    fn add_assign(&mut self, rhs: i32) {
+        self.real += rhs as f32;
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //====================================|| Subtraction ||==========================================//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,6 +173,25 @@ impl ops::Sub<i32> for Complex {
             real: self.real - (rhs as f32),
             imag: self.imag,
         };
+    }
+}
+
+impl ops::SubAssign<Complex> for Complex {
+    fn sub_assign(&mut self, rhs: Complex) {
+        self.real -= rhs.real();
+        self.imag -= rhs.imag();
+    }
+}
+
+impl ops::SubAssign<f32> for Complex {
+    fn sub_assign(&mut self, rhs: f32) {
+        self.real -= rhs;
+    }
+}
+
+impl ops::SubAssign<i32> for Complex {
+    fn sub_assign(&mut self, rhs: i32) {
+        self.real -= rhs as f32;
     }
 }
 
@@ -194,6 +232,30 @@ impl ops::Mul<i32> for Complex {
     }
 }
 
+impl ops::MulAssign<Complex> for Complex {
+    fn mul_assign(&mut self, rhs: Complex) {
+        let result = (*self) * rhs;
+        self.real = result.real();
+        self.imag = result.imag();
+    }
+}
+
+impl ops::MulAssign<f32> for Complex {
+    fn mul_assign(&mut self, rhs: f32) {
+        let result = (*self) * rhs;
+        self.real = result.real();
+        self.imag = result.imag();
+    }
+}
+
+impl ops::MulAssign<i32> for Complex {
+    fn mul_assign(&mut self, rhs: i32) {
+        let result = (*self) * rhs;
+        self.real = result.real();
+        self.imag = result.imag();
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //======================================|| Division ||===========================================//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,6 +287,30 @@ impl ops::Div<i32> for Complex {
             real: self.real / (rhs as f32),
             imag: self.imag / (rhs as f32),
         };
+    }
+}
+
+impl ops::DivAssign<Complex> for Complex {
+    fn div_assign(&mut self, rhs: Complex) {
+        let result = (*self) / rhs;
+        self.real = result.real();
+        self.imag = result.imag();
+    }
+}
+
+impl ops::DivAssign<f32> for Complex {
+    fn div_assign(&mut self, rhs: f32) {
+        let result = (*self) / rhs;
+        self.real = result.real();
+        self.imag = result.imag();
+    }
+}
+
+impl ops::DivAssign<i32> for Complex {
+    fn div_assign(&mut self, rhs: i32) {
+        let result = (*self) / rhs;
+        self.real = result.real();
+        self.imag = result.imag();
     }
 }
 
