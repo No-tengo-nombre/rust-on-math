@@ -1,4 +1,4 @@
-use rom_rs::stats::mean_complex;
+use rom_rs::stats::mean;
 use rom_rs::{complex, mean, median, Complex};
 
 #[test]
@@ -14,13 +14,13 @@ fn operations_mean_complex() {
     test_vec1.push(Complex::one());
     test_vec1.push(Complex::j());
     test_vec1.push(complex!(-1, -1));
-    assert_eq!(0, mean_complex(test_vec1));
+    assert_eq!(0, mean(test_vec1));
 
     let mut test_vec2 = Vec::<Complex>::new();
     test_vec2.push(complex!(1, 1));
     test_vec2.push(complex!(2, 2));
     test_vec2.push(complex!(3, 3));
-    assert_eq!(complex!(2, 2), mean_complex(test_vec2));
+    assert_eq!(complex!(2, 2), mean(test_vec2));
 }
 
 #[test]

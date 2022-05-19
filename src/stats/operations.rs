@@ -1,17 +1,10 @@
-use crate::Complex;
+use crate::Number;
+use std::ops::{AddAssign, Div};
 
-pub fn mean_f32(vals: Vec<f32>) -> f32 {
+/// Calculates the mean of a given vector of numbers
+pub fn mean<T: Number + AddAssign<T> + Div<f32>>(vals: Vec<T>) -> <T as Div<f32>>::Output {
     let vals_len = vals.len() as f32;
-    let mut result = 0.0;
-    for i in vals {
-        result += i;
-    }
-    return result / vals_len;
-}
-
-pub fn mean_complex(vals: Vec<Complex>) -> Complex {
-    let vals_len = vals.len() as f32;
-    let mut result = Complex::zero();
+    let mut result = T::zero();
     for i in vals {
         result += i;
     }
@@ -43,7 +36,7 @@ macro_rules! mean {
         $(
             temp_vec.push($x as f32);
         )*
-        rom_rs::stats::mean_f32(temp_vec)
+        rom_rs::stats::mean(temp_vec)
     }};
 }
 
