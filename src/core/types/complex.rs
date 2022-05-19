@@ -69,7 +69,7 @@ impl Complex {
     }
 
     pub fn exp(&self) -> Complex {
-        return Complex::new(self.real.cos(), self.imag.sin());
+        return self.real.exp() * Complex::new(self.imag.cos(), self.imag.sin());
     }
 
     pub fn cos(&self) -> Complex {
