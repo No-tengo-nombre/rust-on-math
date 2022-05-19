@@ -19,16 +19,16 @@ pub fn mean_complex(vals: Vec<Complex>) -> Complex {
 }
 
 pub fn median_f32(vals: Vec<f32>) -> f32 {
-    let mut vals_copy = vals.clone();
-    vals_copy.sort_by(|a, b| a.partial_cmp(b).unwrap());
-    let vals_len = vals_copy.len() as i32;
+    let mut vals_sorted = vals.clone();
+    vals_sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    let vals_len = vals_sorted.len() as i32;
 
     if vals_len % 2 == 0 {
         let i_high = (vals_len / 2) as usize;
         let i_low = i_high - 1;
-        return (vals_copy[i_high] - vals_copy[i_low]) / 2.0;
+        return (vals_sorted[i_high] + vals_sorted[i_low]) / 2.0;
     } else {
-        return vals_copy[((vals_len as f32) / 2.0).floor() as usize];
+        return vals_sorted[((vals_len as f32) / 2.0).floor() as usize];
     }
 }
 
