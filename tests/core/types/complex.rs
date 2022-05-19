@@ -37,3 +37,13 @@ fn complex_div() {
     assert_eq!(complex!(2, 1), complex!(8, 4) / 4.0);
     assert_eq!(complex!(0.2, 0.1), complex!(8, 4) / 40);
 }
+
+#[test]
+fn complex_eq() {
+    assert_eq!(true, complex!(1, 1) == complex!(1, 1));
+    assert_eq!(false, complex!(1, 1) == complex!(1, 0));
+    assert_eq!(true, complex!(1, 0) == 1.0);
+    assert_eq!(true, complex!(1, 0) == 1);
+    assert_eq!(true, complex!(0, 0) == 0.0);
+    assert_eq!(true, complex!(0, 0) == 0);
+}
