@@ -1,5 +1,5 @@
-use rom_rs::{Complex, complex, mean, median};
 use rom_rs::stats::mean_complex;
+use rom_rs::{complex, mean, median, Complex};
 
 #[test]
 fn operations_mean_reals() {
