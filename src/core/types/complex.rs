@@ -100,9 +100,21 @@ impl PartialEq<f32> for Complex {
     }
 }
 
+impl PartialEq<Complex> for f32 {
+    fn eq(&self, rhs: &Complex) -> bool {
+        return (*self == rhs.real()) && (rhs.imag() == 0.0);
+    }
+}
+
 impl PartialEq<i32> for Complex {
     fn eq(&self, rhs: &i32) -> bool {
         return (self.real() == (*rhs as f32)) && (self.imag() == 0.0);
+    }
+}
+
+impl PartialEq<Complex> for i32 {
+    fn eq(&self, rhs: &Complex) -> bool {
+        return ((*self as f32) == rhs.real()) && (rhs.imag() == 0.0);
     }
 }
 

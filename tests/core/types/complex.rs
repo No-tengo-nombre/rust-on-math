@@ -46,4 +46,8 @@ fn complex_eq() {
     assert_eq!(true, complex!(1, 0) == 1);
     assert_eq!(true, complex!(0, 0) == 0.0);
     assert_eq!(true, complex!(0, 0) == 0);
+    assert_eq!(true, 1.0 == complex!(1, 0));
+    assert_eq!(true, 1 == complex!(1, 0));
+    assert_eq!(true, 0.0 == complex!(0, 0));
+    assert_eq!(true, 0 == complex!(0, 0));
 }
