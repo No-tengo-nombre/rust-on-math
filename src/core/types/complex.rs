@@ -15,7 +15,7 @@ macro_rules! complex {
     };
     ($x:expr) => {
         rom_rs::Complex::new($x as f32, 0.0)
-    }
+    };
 }
 
 impl Complex {
@@ -33,6 +33,13 @@ impl Complex {
     pub fn one() -> Complex {
         return Complex {
             real: 1.0,
+            imag: 0.0,
+        };
+    }
+
+    pub fn zero() -> Complex {
+        return Complex {
+            real: 0.0,
             imag: 0.0,
         };
     }
@@ -72,7 +79,8 @@ impl Complex {
 
     pub fn sin(&self) -> Complex {
         let self_clone = self.clone();
-        return ((Complex::j() * self_clone).exp() - (-Complex::j() * self_clone).exp()) / Complex::new(0.0, 2.0);
+        return ((Complex::j() * self_clone).exp() - (-Complex::j() * self_clone).exp())
+            / Complex::new(0.0, 2.0);
     }
 }
 
@@ -83,6 +91,18 @@ impl fmt::Display for Complex {
         } else {
             write!(f, "{} - j{}", self.real, -self.imag)
         }
+    }
+}
+
+impl PartialEq<f32> for Complex {
+    fn eq(&self, rhs: &f32) -> bool {
+        return (self.real() == *rhs) && (self.imag() == 0.0);
+    }
+}
+
+impl PartialEq<i32> for Complex {
+    fn eq(&self, rhs: &i32) -> bool {
+        return (self.real() == (*rhs as f32)) && (self.imag() == 0.0);
     }
 }
 
@@ -112,6 +132,17 @@ impl ops::Add<f32> for Complex {
     }
 }
 
+impl ops::Add<Complex> for f32 {
+    type Output = Complex;
+
+    fn add(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: self + rhs.real(),
+            imag: rhs.imag(),
+        };
+    }
+}
+
 impl ops::Add<i32> for Complex {
     type Output = Complex;
 
@@ -119,6 +150,17 @@ impl ops::Add<i32> for Complex {
         return Complex {
             real: self.real + (rhs as f32),
             imag: self.imag,
+        };
+    }
+}
+
+impl ops::Add<Complex> for i32 {
+    type Output = Complex;
+
+    fn add(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: (self as f32) + rhs.real(),
+            imag: rhs.imag(),
         };
     }
 }
@@ -168,6 +210,17 @@ impl ops::Sub<f32> for Complex {
     }
 }
 
+impl ops::Sub<Complex> for f32 {
+    type Output = Complex;
+
+    fn sub(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: self - rhs.real(),
+            imag: -rhs.imag(),
+        };
+    }
+}
+
 impl ops::Sub<i32> for Complex {
     type Output = Complex;
 
@@ -175,6 +228,17 @@ impl ops::Sub<i32> for Complex {
         return Complex {
             real: self.real - (rhs as f32),
             imag: self.imag,
+        };
+    }
+}
+
+impl ops::Sub<Complex> for i32 {
+    type Output = Complex;
+
+    fn sub(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: (self as f32) - rhs.real(),
+            imag: -rhs.imag(),
         };
     }
 }
@@ -224,6 +288,17 @@ impl ops::Mul<f32> for Complex {
     }
 }
 
+impl ops::Mul<Complex> for f32 {
+    type Output = Complex;
+
+    fn mul(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: self * rhs.real(),
+            imag: self * rhs.imag(),
+        };
+    }
+}
+
 impl ops::Mul<i32> for Complex {
     type Output = Complex;
 
@@ -231,6 +306,17 @@ impl ops::Mul<i32> for Complex {
         return Complex {
             real: self.real * (rhs as f32),
             imag: self.imag * (rhs as f32),
+        };
+    }
+}
+
+impl ops::Mul<Complex> for i32 {
+    type Output = Complex;
+
+    fn mul(self, rhs: Complex) -> Complex {
+        return Complex {
+            real: (self as f32) * rhs.real(),
+            imag: (self as f32) * rhs.imag(),
         };
     }
 }
@@ -282,6 +368,14 @@ impl ops::Div<f32> for Complex {
     }
 }
 
+impl ops::Div<Complex> for f32 {
+    type Output = Complex;
+
+    fn div(self, rhs: Complex) -> Complex {
+        return self * rhs.inv();
+    }
+}
+
 impl ops::Div<i32> for Complex {
     type Output = Complex;
 
@@ -290,6 +384,14 @@ impl ops::Div<i32> for Complex {
             real: self.real / (rhs as f32),
             imag: self.imag / (rhs as f32),
         };
+    }
+}
+
+impl ops::Div<Complex> for i32 {
+    type Output = Complex;
+
+    fn div(self, rhs: Complex) -> Complex {
+        return self * rhs.inv();
     }
 }
 
