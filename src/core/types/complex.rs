@@ -1,11 +1,6 @@
 use std::fmt;
 use std::ops;
 
-pub trait Number {
-    fn to_complex(&self) -> Complex;
-    fn zero() -> Self;
-}
-
 /// Complex number
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Complex {
@@ -86,40 +81,6 @@ impl Complex {
         let self_clone = self.clone();
         return ((Complex::j() * self_clone).exp() - (-Complex::j() * self_clone).exp())
             / Complex::new(0.0, 2.0);
-    }
-}
-
-impl Number for Complex {
-    fn to_complex(&self) -> Complex {
-        return *self;
-    }
-
-    fn zero() -> Self {
-        // return Complex {
-        //     real: 0.0,
-        //     imag: 0.0,
-        // };
-        return Complex::zero();
-    }
-}
-
-impl Number for f32 {
-    fn to_complex(&self) -> Complex {
-        return Complex::new(*self, 0.0);
-    }
-
-    fn zero() -> Self {
-        return 0.0;
-    }
-}
-
-impl Number for i32 {
-    fn to_complex(&self) -> Complex {
-        return Complex::new(*self as f32, 0.0);
-    }
-
-    fn zero() -> Self {
-        return 0;
     }
 }
 
